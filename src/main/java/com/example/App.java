@@ -1,7 +1,9 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -15,16 +17,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Group root = new Group();
-        Scene scene1 = new Scene(root, 500, 500);
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/landingPage.fxml"));
+        Scene scene1 = new Scene(root);
         scene1.setFill(Color.web("0x191919"));
 
-        Image appIcon = new Image(getClass().getResource("assets/appIcon.png").toURI().toString());
-        Text someText = new Text("HELLO HELLO!");
-        someText.setX(50);
-        someText.setY(50);
-
-        root.getChildren().add(someText);
+        Image appIcon = new Image(getClass().getResource("images/appIcon.png").toURI().toString());
+        
         primaryStage.getIcons().add(appIcon);
         primaryStage.setScene(scene1);
         primaryStage.setTitle("Qamar");
