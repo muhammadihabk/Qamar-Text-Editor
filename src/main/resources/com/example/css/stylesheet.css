@@ -11,3 +11,8 @@
 .text-area .content {
     -fx-background-color: #282828;
 }
+
+#featureData {
+    -fx-font-size: 21px;
+    -fx-background-color: #565656;
+}

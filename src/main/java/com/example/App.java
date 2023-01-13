@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -47,6 +48,8 @@ public class App extends Application {
         primaryStage.getIcons().add(appIcon);
         primaryStage.setScene(scene);
         primaryStage.setTitle("QamarKeez");
+        primaryStage.setWidth(Screen.getPrimary().getBounds().getWidth());
+        primaryStage.setHeight(Screen.getPrimary().getBounds().getHeight());
         primaryStage.show();
     }
 
