@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.example.document.Document;
+import com.example.document.FleshScore;
 
 public class DocumentTest {
-    private Document document;
+    private FleshScore document;
     private String simpleDoc;
     private String simpleDoc_2;
     private String syllablesEndsE_1;
@@ -19,7 +19,7 @@ public class DocumentTest {
 
     @BeforeEach
     public void setup() {
-        document = new Document(simpleDoc);
+        document = new FleshScore(simpleDoc);
         simpleDoc = "Hello!!! This is Muhammad... Abc, abc abc abc.";
         simpleDoc_2 = "Hello!!! This is Muhammad... Abc, abc abc abc";
         syllablesEndsE_1 = "the";

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.example.document.FleshScore;
 import com.example.generate.TextGenerator;
 
 import javafx.fxml.FXML;
@@ -34,6 +35,7 @@ public class Controller implements Initializable {
                         "Toggle spelling correction"};
     
     private TextGenerator textGenerator;
+    private FleshScore fleshScore;
                         
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -59,6 +61,7 @@ public class Controller implements Initializable {
                     } else {
                         toggleSpellingCorrection();
                     }
+                    featureDataLabel.setVisible(true);
                     return;
                 }
             }
@@ -79,15 +82,15 @@ public class Controller implements Initializable {
         textGenerator = new TextGenerator(editorTextArea.getText());
         textGenerator.trainModel();
         featureDataLabel.setText(textGenerator.generate(75));
-        featureDataLabel.setVisible(true);
     }
 
     // TODO
     private void toggleAutocomplete() {
     }
     
-    // TODO
     private void toggleFleshScore() {
+        fleshScore = new FleshScore(editorTextArea.getText());
+        featureDataLabel.setText(String.format("%.2f", fleshScore.getFleschScore()));
     }
     
     // TODO

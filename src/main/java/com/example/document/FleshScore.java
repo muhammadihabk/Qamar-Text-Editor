@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Document {
+public class FleshScore {
     private String text;
     private int wordsCount = 0;
     private int sentencesCount = 0;
     private int syllablesCount = 0;
     
-    public Document(String text) {
+    public FleshScore(String text) {
         this.text = text;
     }
 
