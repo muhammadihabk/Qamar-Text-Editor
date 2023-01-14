@@ -48,7 +48,7 @@ public class TrieDictionary {
     }
 
     public List<String> getPossibleWords(String prefix, int countWords) {
-        List<String> answer = new LinkedList<>();
+        List<String> answer = new LinkedList<String>();
         if(prefix.length() == 0) {
             return answer;
         }

@@ -3,8 +3,11 @@ package com.example;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
+import com.example.autocomplete.TrieDictionary;
 import com.example.document.FleshScore;
 import com.example.generate.TextGenerator;
 
@@ -15,9 +18,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class Controller implements Initializable {
 
+    @FXML
+    private AnchorPane root;
+    
     @FXML
     private ListView<String> palette;
 
@@ -26,8 +33,10 @@ public class Controller implements Initializable {
 
     @FXML
     private TextArea editorTextArea;
-
-    private boolean paletteVisibilityToggle = false;
+    
+    private ListView<String> autocompleteListView;
+    
+    private boolean paletteVisibilityToggle;
 
     String[] options = {"Generate text",
                         "Toggle autocomplete",
@@ -36,12 +45,31 @@ public class Controller implements Initializable {
     
     private TextGenerator textGenerator;
     private FleshScore fleshScore;
+    private boolean autocomplete;
+    private TrieDictionary trieDictionary;
                         
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         palette.getItems().addAll(options);
         palette.getItems().filtered(null);
         featureDataLabel.setVisible(false);
+        autocompleteListView = new ListView<>();
+        autocompleteListView.setLayoutX(330);
+        autocompleteListView.setLayoutY(280);
+        autocompleteListView.setVisible(false);
+        AnchorPane.setRightAnchor(autocompleteListView, 25.0);
+        root.getChildren().add(autocompleteListView);
+        trieDictionary = new TrieDictionary();
+        trieDictionary.initialize();
+        autocompleteListView.setOnKeyPressed((e) -> {
+            if(e.getCode() == KeyCode.ENTER) {
+                autocompleteListView.setVisible(false);
+                String selectedItem = autocompleteListView.getSelectionModel().getSelectedItem();
+                String newText = editorTextArea.getText().replaceFirst("[a-zA-Z]+$", selectedItem);
+                editorTextArea.setText(newText);
+                editorTextArea.end();
+            }
+        });
     }
 
 
@@ -61,7 +89,6 @@ public class Controller implements Initializable {
                     } else {
                         toggleSpellingCorrection();
                     }
-                    featureDataLabel.setVisible(true);
                     return;
                 }
             }
@@ -82,15 +109,37 @@ public class Controller implements Initializable {
         textGenerator = new TextGenerator(editorTextArea.getText());
         textGenerator.trainModel();
         featureDataLabel.setText(textGenerator.generate(75));
+        featureDataLabel.setVisible(true);
     }
 
     // TODO
     private void toggleAutocomplete() {
+        autocomplete = !autocomplete;
+    }
+
+    @FXML
+    public void autocomplete() {
+        if(autocomplete) {
+            String[] allUserInputText = editorTextArea.getText().split(" ");
+            String userInputText = allUserInputText[allUserInputText.length - 1];
+            List<String> possibleWords = trieDictionary.getPossibleWords(userInputText, 10);
+            autocompleteListView.getItems().clear();
+            autocompleteListView.getItems().addAll(possibleWords);
+            autocompleteListView.setVisible(true);
+        }
+    }
+
+    @FXML
+    public void focusAutocompleteListView(KeyEvent e) {
+        if(e.getCode() == KeyCode.DOWN) {
+            autocompleteListView.requestFocus();
+        }
     }
     
     private void toggleFleshScore() {
         fleshScore = new FleshScore(editorTextArea.getText());
         featureDataLabel.setText(String.format("%.2f", fleshScore.getFleschScore()));
+        featureDataLabel.setVisible(true);
     }
     
     // TODO

@@ -6,9 +6,9 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #191919;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #191919;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller">
    <children>
-      <TextArea fx:id="editorTextArea" prefHeight="400.0" prefWidth="600.0" promptText="text" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TextArea fx:id="editorTextArea" onKeyPressed="#focusAutocompleteListView" onKeyTyped="#autocomplete" prefHeight="400.0" prefWidth="600.0" promptText="text" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ListView fx:id="palette" layoutX="100.0" maxHeight="125.0" onKeyPressed="#chooseOption" visible="false" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="0.0" />
       <Label fx:id="featureDataLabel" alignment="TOP_LEFT" layoutX="527.0" layoutY="33.0" maxHeight="250.0" maxWidth="350.0" minHeight="250.0" minWidth="350.0" style="-fx-background-color: #999999;" textAlignment="CENTER" textFill="#dddddd" wrapText="true" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
          <padding>
