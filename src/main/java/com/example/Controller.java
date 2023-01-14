@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 import com.example.autocomplete.TrieDictionary;
 import com.example.document.FleshScore;
@@ -43,8 +42,6 @@ public class Controller implements Initializable {
                         "Toggle flesh score",
                         "Toggle spelling correction"};
     
-    private TextGenerator textGenerator;
-    private FleshScore fleshScore;
     private boolean autocomplete;
     private TrieDictionary trieDictionary;
                         
@@ -106,7 +103,7 @@ public class Controller implements Initializable {
     }
     
     private void generateText() {
-        textGenerator = new TextGenerator(editorTextArea.getText());
+        TextGenerator textGenerator = new TextGenerator(editorTextArea.getText());
         textGenerator.trainModel();
         featureDataLabel.setText(textGenerator.generate(75));
         featureDataLabel.setVisible(true);
@@ -137,7 +134,7 @@ public class Controller implements Initializable {
     }
     
     private void toggleFleshScore() {
-        fleshScore = new FleshScore(editorTextArea.getText());
+        FleshScore fleshScore = new FleshScore(editorTextArea.getText());
         featureDataLabel.setText(String.format("%.2f", fleshScore.getFleschScore()));
         featureDataLabel.setVisible(true);
     }
