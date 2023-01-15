@@ -112,6 +112,8 @@ public class Controller implements Initializable {
     // TODO
     private void toggleAutocomplete() {
         autocomplete = !autocomplete;
+        autocompleteListView.setVisible(autocomplete);
+        editorTextArea.requestFocus();
     }
 
     @FXML
