@@ -1,4 +1,4 @@
-module Qamar {
+module QamarKeez {
     requires javafx.controls;
     requires javafx.fxml;
     requires transitive javafx.graphics;
