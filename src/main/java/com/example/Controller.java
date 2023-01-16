@@ -115,7 +115,7 @@ public class Controller implements Initializable {
     @FXML
     public void autocomplete() {
         if(autocomplete) {
-            String[] allUserInputText = editorTextArea.getText().split(" ");
+            String[] allUserInputText = editorTextArea.getText().split("[ \n]");
             String userInputText = allUserInputText[allUserInputText.length - 1];
             List<String> possibleWords = trieDictionary.getPossibleWords(userInputText, 10);
             autocompleteListView.getItems().clear();
