@@ -39,8 +39,7 @@ public class Controller implements Initializable {
 
     String[] options = {"Generate text",
                         "Toggle autocomplete",
-                        "Toggle flesh score",
-                        "Toggle spelling correction"};
+                        "Toggle flesh score"};
     
     private boolean autocomplete;
     private TrieDictionary trieDictionary;
@@ -69,7 +68,6 @@ public class Controller implements Initializable {
         });
     }
 
-
     @FXML
     private void chooseOption(KeyEvent e) throws IOException {
         if(e.getCode() == KeyCode.ENTER) {
@@ -81,10 +79,8 @@ public class Controller implements Initializable {
                         generateText();
                     } else if(option.equals("Toggle autocomplete")) {
                         toggleAutocomplete();
-                    } else if(option.equals("Toggle flesh score")) {
-                        toggleFleshScore();
                     } else {
-                        toggleSpellingCorrection();
+                        toggleFleshScore();
                     }
                     return;
                 }
@@ -139,9 +135,5 @@ public class Controller implements Initializable {
         FleshScore fleshScore = new FleshScore(editorTextArea.getText());
         featureDataLabel.setText(String.format("%.2f", fleshScore.getFleschScore()));
         featureDataLabel.setVisible(true);
-    }
-    
-    // TODO
-    private void toggleSpellingCorrection() {
     }
 }
